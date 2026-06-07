@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+/* Class-based dark mode */
+@custom-variant dark (&:is(.dark, .dark *));
+
+@theme {
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
+
+  /* Primary accent — indigo/violet */
+  --color-accent: #6366f1;
+  --color-accent-dark: #4f46e5;
+  --color-accent-light: #818cf8;
+  --color-accent-muted: #6366f11a;
+
+  /* Keep "teal" name mapped to accent for backwards compat */
+  --color-teal: #6366f1;
+  --color-teal-dark: #4f46e5;
+  --color-teal-light: #818cf8;
+
+  /* Surfaces */
+  --color-navy: #09090b;
+  --color-navy-800: #0d0d12;
+  --color-navy-700: #111118;
+  --color-navy-600: #16161f;
+  --color-navy-500: #1e1e2a;
+  --color-navy-400: #2a2a3a;
+
+  /* Text */
+  --color-ink-50: #fafafa;
+  --color-ink-100: #f4f4f5;
+  --color-ink-200: #e4e4e7;
+  --color-ink-300: #d4d4d8;
+  --color-ink-400: #a1a1aa;
+  --color-ink-500: #71717a;
+  --color-ink-600: #52525b;
+  --color-ink-700: #3f3f46;
+  --color-ink-800: #27272a;
+  --color-ink-900: #18181b;
+}
+
+/* ─── Base ────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  color: #fafafa;
+}
+
+html.light {
+  background-color: #fafafa;
+  color: #18181b;
+}
+
+body {
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Rich dark background: faint indigo glow from top + violet bleed bottom-right */
+  background-color: #09090b;
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -5%, rgba(99,102,241,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 45% at 90% 90%, rgba(139,92,246,0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 5% 60%, rgba(79,70,229,0.07) 0%, transparent 60%);
+}
+
+/* ─── Grain texture overlay ───────────────────────────── */
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.032;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Subtle dot-grid overlay on sections ─────────────── */
+
+.bg-grid {
+  background-image:
+    radial-gradient(circle, rgba(99,102,241,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-grid-faint {
+  background-image:
+    linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─── Selection ───────────────────────────────────────── */
+
+::selection {
+  background-color: rgba(99, 102, 241, 0.28);
+  color: #a5b4fc;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-thumb { background: #1e1e2a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+
+/* ─── Float animations ────────────────────────────────── */
+
+@keyframes float-blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -22px) scale(1.06); }
+  66% { transform: translate(-20px, 14px) scale(0.96); }
+}
+
+.animate-float-blob {
+  animation: float-blob 14s ease-in-out infinite;
+}
+.animate-float-blob-delayed {
+  animation: float-blob 18s ease-in-out infinite reverse;
+  animation-delay: -6s;
+}
+.animate-float-blob-slow {
+  animation: float-blob 22s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+/* ─── Gradient text ───────────────────────────────────── */
+
+.text-gradient {
+  background: linear-gradient(125deg, #a5b4fc 0%, #6366f1 45%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glowing card border ─────────────────────────────── */
+
+.card-glow {
+  position: relative;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(99,102,241,0.4) 0%, transparent 50%, rgba(139,92,246,0.2) 100%);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+.card-glow > * { position: relative; z-index: 1; }
+.card-glow:hover::before { opacity: 1; }
+.card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.55), 0 0 40px rgba(99,102,241,0.1);
+}
+
+/* ─── Browser mockup ──────────────────────────────────── */
+
+.browser-chrome {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.browser-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+/* ─── Dot grid (profile avatar) ───────────────────────── */
+
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(99,102,241,0.35) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ─── Glow pill (skills) ──────────────────────────────── */
+
+.pill-glow {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.pill-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(99,102,241,0.2);
+}
