@@ -26,9 +26,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   const isLight = theme === "light";
 
@@ -44,21 +42,32 @@ export default function Navbar() {
         }`}
       >
         <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
+
+          {/* ── Logo ── */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 font-display font-bold text-sm"
+            className="group flex items-center gap-0.5 select-none"
             aria-label="Arnav Narula — Home"
           >
-            <span className="w-7 h-7 rounded-md bg-accent text-white flex items-center justify-center text-xs font-black leading-none select-none">
-              AN
+            {/* Terminal prompt */}
+            <span className="font-mono font-bold text-accent text-lg mr-1 transition-colors group-hover:text-accent-light">
+              &gt;
             </span>
-            <span className={`hidden sm:block transition-colors ${isLight ? "text-ink-800" : "text-ink-200"}`}>
-              Arnav Narula
+            {/* Name gradient */}
+            <span className="font-display font-black text-base text-gradient tracking-tight">
+              arnav
             </span>
+            {/* Blinking underscore cursor */}
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ repeat: Infinity, duration: 1.1 }}
+              className="font-mono font-black text-accent text-lg leading-none ml-0.5"
+            >
+              _
+            </motion.span>
           </Link>
 
-          {/* Desktop nav */}
+          {/* ── Desktop nav ── */}
           <div className="hidden md:flex items-center gap-1">
             {links.map(({ href, label }) => {
               const active = pathname === href;
@@ -85,9 +94,20 @@ export default function Navbar() {
               );
             })}
 
+            {/* Availability dot */}
+            <div className={`hidden lg:flex items-center gap-1.5 mx-2 px-3 py-1.5 rounded-full text-xs font-mono ${
+              isLight ? "bg-emerald-50 text-emerald-600 border border-emerald-200" : "bg-emerald-950/40 text-emerald-400 border border-emerald-800/40"
+            }`}>
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+              </span>
+              Available
+            </div>
+
             <button
               onClick={toggle}
-              className={`ml-2 p-2 rounded-lg transition-colors ${
+              className={`ml-1 p-2 rounded-lg transition-colors ${
                 isLight
                   ? "text-ink-500 hover:text-ink-900 hover:bg-ink-100"
                   : "text-ink-500 hover:text-ink-100 hover:bg-navy-600"
@@ -98,7 +118,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile controls */}
+          {/* ── Mobile controls ── */}
           <div className="flex md:hidden items-center gap-1">
             <button
               onClick={toggle}
@@ -163,6 +183,16 @@ export default function Navbar() {
                   );
                 })}
               </nav>
+
+              <div className={`mt-6 flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-mono w-fit ${
+                isLight ? "bg-emerald-50 text-emerald-600 border border-emerald-200" : "bg-emerald-950/40 text-emerald-400 border border-emerald-800/40"
+              }`}>
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                </span>
+                Available for hire
+              </div>
             </motion.div>
           </>
         )}
