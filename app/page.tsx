@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
+import TechMarquee from "@/components/TechMarquee";
 import WhatIDo from "@/components/WhatIDo";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import CTAStrip from "@/components/CTAStrip";
@@ -13,6 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <TechMarquee />
       <WhatIDo />
       <FeaturedProjects />
       <CTAStrip />
