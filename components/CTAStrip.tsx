@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 import ScrollReveal from "./ScrollReveal";
 import { personalInfo } from "@/lib/data";
@@ -12,116 +13,114 @@ export default function CTAStrip() {
   const isLight = theme === "light";
 
   return (
-    <section className={`relative py-32 overflow-hidden ${isLight ? "bg-ink-50" : ""}`}>
-      {/* Rich gradient background — dark only */}
+    <section className={`relative py-36 overflow-hidden ${isLight ? "bg-ink-50" : ""}`}>
+      {/* Dark mode: rich layered background */}
       {!isLight && (
         <div className="absolute inset-0 pointer-events-none">
           <div
             className="absolute inset-0"
-            style={{
-              background: "linear-gradient(180deg, #09090b 0%, #0d0d18 40%, #111128 70%, #0d0d12 100%)",
-            }}
+            style={{ background: "linear-gradient(180deg, #09090b 0%, #0d0d18 40%, #111128 70%, #0d0d12 100%)" }}
           />
-          {/* Big center indigo glow */}
+          {/* Big centre glow */}
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full"
             style={{
               background: "radial-gradient(ellipse, rgba(99,102,241,0.22) 0%, rgba(139,92,246,0.1) 40%, transparent 70%)",
-              filter: "blur(50px)",
-            }}
-          />
-          {/* Left glow */}
-          <div
-            className="absolute top-0 left-0 w-80 h-80 rounded-full"
-            style={{
-              background: "radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%)",
               filter: "blur(60px)",
             }}
           />
-          {/* Right glow */}
-          <div
-            className="absolute bottom-0 right-0 w-72 h-72 rounded-full"
-            style={{
-              background: "radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%)",
-              filter: "blur(55px)",
-            }}
-          />
-          {/* Subtle grid */}
+          {/* Corner glows */}
+          <div className="absolute top-0 left-0 w-96 h-96 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(79,70,229,0.14) 0%, transparent 70%)", filter: "blur(60px)" }} />
+          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%)", filter: "blur(55px)" }} />
           <div className="absolute inset-0 bg-grid-faint opacity-20" />
         </div>
       )}
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
         <ScrollReveal>
-          <span
-            className="inline-block text-xs font-mono mb-5 px-3 py-1.5 rounded-full tracking-[0.2em] uppercase"
-            style={{ background: "rgba(99,102,241,0.15)", color: "#818cf8", border: "1px solid rgba(99,102,241,0.25)" }}
+          {/* Badge */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full"
+            style={{ background: "rgba(99,102,241,0.15)", border: "1px solid rgba(99,102,241,0.28)", color: "#818cf8" }}
           >
-            Open to work
-          </span>
+            <Zap size={13} className="shrink-0" />
+            <span className="text-xs font-mono tracking-[0.18em] uppercase font-medium">Open to work</span>
+          </motion.div>
 
-          <h2 className={`font-display font-black text-4xl sm:text-5xl md:text-[3.5rem] leading-tight mb-5 ${
-            isLight ? "text-ink-900" : "text-ink-50"
-          }`}>
-            Have a project in mind?
+          {/* Heading */}
+          <h2 className={`font-display font-black leading-tight mb-4 ${isLight ? "text-ink-900" : "text-ink-50"}`}
+            style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)" }}>
+            Let&apos;s build something
+            <br />
+            <span className="text-gradient">remarkable together.</span>
           </h2>
 
-          {/* Gradient divider line */}
+          {/* Divider line */}
           {!isLight && (
             <div
-              className="w-24 h-px mx-auto mb-5"
-              style={{ background: "linear-gradient(90deg, transparent, #6366f1, transparent)" }}
+              className="w-28 h-px mx-auto mb-6 mt-2"
+              style={{ background: "linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent)" }}
             />
           )}
 
-          <p className={`text-lg mb-10 ${isLight ? "text-ink-500" : "text-ink-400"}`}>
-            I&apos;m available for freelance work, full-time roles, and open-source collabs.
+          <p className={`text-lg leading-relaxed mb-12 max-w-xl mx-auto ${isLight ? "text-ink-500" : "text-ink-400"}`}>
+            I&apos;m available for full-time roles, freelance projects, and open-source collaborations.
+            Response time: usually within 24 hours.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-white font-semibold text-sm rounded-xl transition-all duration-200 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/30"
+              className="btn-shine group inline-flex items-center gap-2 px-8 py-4 bg-accent text-white font-bold text-sm rounded-xl transition-all duration-200 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-accent/35"
             >
               Let&apos;s Talk
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
             <a
               href={`mailto:${personalInfo.email}`}
-              className={`text-sm font-mono transition-colors px-4 py-2 rounded-lg border ${
+              className={`inline-flex items-center gap-2 text-sm font-mono px-5 py-3.5 rounded-xl border transition-all duration-200 hover:-translate-y-0.5 ${
                 isLight
-                  ? "border-ink-200 text-ink-500 hover:border-ink-400 hover:text-ink-800"
-                  : "border-white/10 text-ink-500 hover:border-accent/50 hover:text-ink-200"
+                  ? "border-ink-200 text-ink-500 hover:border-accent hover:text-accent hover:bg-accent/5"
+                  : "border-white/10 text-ink-500 hover:border-accent/50 hover:text-ink-200 hover:bg-accent/8"
               }`}
             >
+              <Mail size={14} />
               {personalInfo.email}
             </a>
           </div>
 
-          {/* Divider */}
+          {/* Socials divider */}
           <div
             className={`flex items-center justify-center gap-4 pt-8 border-t ${
               isLight ? "border-ink-200" : "border-white/8"
             }`}
           >
+            <span className={`text-xs font-mono mr-2 ${isLight ? "text-ink-400" : "text-ink-600"}`}>Find me on</span>
             {[
               { href: personalInfo.github, label: "GitHub", icon: <GithubIcon size={18} /> },
               { href: personalInfo.linkedin, label: "LinkedIn", icon: <LinkedinIcon size={18} /> },
-              { href: `mailto:${personalInfo.email}`, label: "Email", icon: <Mail size={18} /> },
             ].map(({ href, label, icon }) => (
               <a
                 key={label}
                 href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
+                target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className={`p-2.5 rounded-xl transition-all duration-200 hover:-translate-y-0.5 ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent ${
                   isLight
-                    ? "text-ink-400 hover:text-ink-800 hover:bg-ink-100"
-                    : "text-ink-600 hover:text-ink-200 hover:bg-white/8"
+                    ? "border-ink-200 text-ink-500 bg-white"
+                    : "border-white/10 text-ink-400 hover:bg-accent/8"
                 }`}
               >
                 {icon}
+                {label}
               </a>
             ))}
           </div>
