@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import PageTransition from "@/components/PageTransition";
+import LoadingScreen from "@/components/LoadingScreen";
 import { personalInfo } from "@/lib/data";
 
 const syne = Syne({
@@ -127,6 +128,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col font-sans antialiased">
+        <LoadingScreen />
         <ThemeProvider>
           <Navbar />
           <PageTransition>
