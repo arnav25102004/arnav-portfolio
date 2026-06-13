@@ -57,9 +57,13 @@ function TimelineItem({
         }`}
       />
 
-      {/* Content — no heavy card, just a left-accent border */}
+      {/* Content card with hover glow */}
       <div
-        className={`pl-5 border-l-2 ${isLight ? "border-ink-200" : "border-white/10"}`}
+        className={`hover-glow pl-5 py-4 pr-4 rounded-xl border-l-2 cursor-default ${
+          isLight
+            ? "border-ink-200 hover:border-accent/40"
+            : "border-white/10 hover:border-accent/40"
+        }`}
       >
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 mb-3">
@@ -90,7 +94,7 @@ function TimelineItem({
               key={bi}
               className={`text-sm leading-relaxed flex gap-2 ${isLight ? "text-ink-600" : "text-ink-400"}`}
             >
-              <span className="text-accent/60 mt-[5px] shrink-0 text-xs">◆</span>
+              <span className="text-accent/60 mt-1.25 shrink-0 text-xs">◆</span>
               {b}
             </li>
           ))}

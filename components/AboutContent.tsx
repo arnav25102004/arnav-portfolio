@@ -48,11 +48,13 @@ export default function AboutContent() {
               {/* Quick stats */}
               <div className="grid grid-cols-3 gap-4 mt-8">
                 {[
-                  { value: "3+", label: "PRs merged" },
+                  { value: "5+", label: "PRs merged" },
                   { value: "3", label: "Production apps" },
                   { value: "2+", label: "Years open source" },
                 ].map((stat) => (
-                  <div key={stat.label}>
+                  <div key={stat.label} className={`p-4 rounded-xl border hover-glow cursor-default ${
+                    isLight ? "border-ink-200 bg-white" : "border-white/8 bg-navy-700"
+                  }`}>
                     <p className={`font-display font-black text-2xl ${isLight ? "text-ink-900" : "text-ink-50"}`}>
                       {stat.value}
                     </p>
@@ -98,8 +100,8 @@ export default function AboutContent() {
             {education.map((edu, i) => (
               <ScrollReveal key={edu.school} delay={i * 0.08}>
                 <div
-                  className={`p-5 rounded-xl border-l-2 border-accent/40 ${
-                    isLight ? "bg-ink-50" : "bg-navy-800"
+                  className={`hover-glow p-6 rounded-xl border-l-4 border-accent/50 cursor-default ${
+                    isLight ? "bg-ink-50 border-r border-t border-b border-r-ink-200 border-t-ink-200 border-b-ink-200" : "bg-navy-800 border-r border-t border-b border-r-white/6 border-t-white/6 border-b-white/6"
                   }`}
                 >
                   <h3 className={`font-display font-semibold text-sm mb-1 ${isLight ? "text-ink-800" : "text-ink-100"}`}>
@@ -141,13 +143,17 @@ export default function AboutContent() {
             </h2>
           </ScrollReveal>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             {achievements.map((ach, i) => {
               const Icon = achievementIcons[i % achievementIcons.length];
               return (
                 <ScrollReveal key={i} delay={i * 0.06}>
-                  <div className={`flex items-center gap-4 py-4 border-b ${isLight ? "border-ink-100" : "border-white/6"}`}>
-                    <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0">
+                  <div className={`hover-glow flex items-center gap-4 py-4 px-4 rounded-xl border cursor-default transition-colors ${
+                    isLight
+                      ? "border-ink-100 hover:border-accent/30 hover:bg-accent/3"
+                      : "border-white/5 hover:border-accent/25 hover:bg-accent/5"
+                  }`}>
+                    <div className="w-9 h-9 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0">
                       <Icon size={16} />
                     </div>
                     <p className={`text-sm ${isLight ? "text-ink-700" : "text-ink-300"}`}>{ach}</p>
@@ -164,7 +170,7 @@ export default function AboutContent() {
             <a
               href={personalInfo.resumeUrl}
               download
-              className="group inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-white font-semibold text-sm rounded-xl transition-all duration-200 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
+              className="btn-shine group inline-flex items-center gap-2 px-7 py-3.5 bg-accent text-white font-semibold text-sm rounded-xl transition-all duration-200 hover:bg-accent-light hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
             >
               <Download size={16} />
               Download Resume
