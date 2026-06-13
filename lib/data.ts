@@ -7,16 +7,15 @@ export const personalInfo = {
   phone: "+91 6398218178",
   location: "Bangalore, India",
   locationShort: "Bangalore, IN",
-  // ⚠ Update these with your actual URLs
-  github: "https://github.com/arnavnarula25",
+  github: "https://github.com/arnav25102004",
   linkedin: "https://linkedin.com/in/arnavnarula",
   resumeUrl: "/resume.pdf",
 };
 
 export const projects = [
   {
-    id: "jurisprudential-ai",
-    title: "Jurisprudential AI",
+    id: "dharma-ai",
+    title: "Dharma AI",
     year: "2025",
     accentColor: "#f59e0b",
     shortDesc:
@@ -25,7 +24,7 @@ export const projects = [
       "Legal-tech assistant using GraphRAG to link ancient Indian legal concepts (Dharma, Danda) with modern statutes. Multi-step reasoning pipeline with LangGraph for routing judicial vs general legal queries. Automated source-backed citations across 60+ authoritative legal PDFs.",
     stack: ["React", "FastAPI", "LangChain", "Neo4j", "Pinecone", "GPT-4o"],
     github: "#",
-    demo: null,
+    demo: "https://dharma-ai-nine.vercel.app",
     featured: true,
   },
   {
@@ -162,7 +161,7 @@ export const achievements = [
   "Winner — CHRIST National Level Hackathon (Revelations) for Christ Eats",
   "Class Representative for 3 consecutive years (BCA, Graphic Era University)",
   "NSS Student Cell Coordinator — led community outreach drives",
-  "3+ production PRs merged to Oppia Foundation — Apache Beam, Angular, TypeScript",
+  "5+ production PRs merged to Oppia Foundation — Apache Beam, Angular, TypeScript",
 ];
 
 export const domains = [
