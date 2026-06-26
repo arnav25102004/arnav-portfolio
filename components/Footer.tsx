@@ -93,6 +93,14 @@ export default function Footer() {
             <p className={`text-xs ${isLight ? "text-ink-400" : "text-ink-600"}`}>
               © 2026 Arnav Narula · Built with Next.js &amp; Tailwind
             </p>
+            <Link
+              href="/privacy"
+              className={`text-xs transition-colors ${
+                isLight ? "text-ink-300 hover:text-ink-600" : "text-ink-700 hover:text-ink-400"
+              }`}
+            >
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </div>
