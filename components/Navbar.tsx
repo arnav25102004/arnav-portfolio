@@ -26,7 +26,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen(false);
+  }, [pathname]);
 
   const isLight = theme === "light";
 

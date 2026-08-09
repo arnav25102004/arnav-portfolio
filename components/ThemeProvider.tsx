@@ -14,13 +14,14 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "dark";
+    return (localStorage.getItem("theme") as Theme | null) ?? "dark";
+  });
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme") as Theme | null;
-    const initial = saved ?? "dark";
-    applyTheme(initial);
-    setTheme(initial);
+    applyTheme(theme);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function applyTheme(t: Theme) {

@@ -44,6 +44,7 @@ export default function Hero() {
     } else if (isDeleting && displayText.length > 0) {
       timer = setTimeout(() => setDisplayText(displayText.slice(0, -1)), 26);
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDeleting(false);
       setTaglineIdx((i) => (i + 1) % TAGLINES.length);
     }

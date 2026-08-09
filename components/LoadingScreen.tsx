@@ -45,7 +45,7 @@ export default function LoadingScreen() {
           {/* Boot lines — terminal style */}
           <div className="w-full max-w-lg space-y-1.5 font-mono text-xs">
             <p className="text-ink-700 mb-3 tracking-widest uppercase text-[10px]">
-              // System initializing
+              {"// System initializing"}
             </p>
             {BOOT_LINES.map((line, i) => (
               <motion.div
